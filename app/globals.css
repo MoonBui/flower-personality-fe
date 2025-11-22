@@ -24,3 +24,7 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.phone-screen-shadow {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+}
