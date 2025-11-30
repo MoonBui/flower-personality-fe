@@ -28,3 +28,26 @@ body {
 .phone-screen-shadow {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
 }
+
+.chat-display {
+  padding: 1rem;
+  height: calc(100% - 170px);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.chat-bubble {
+    background-color: var(--bubble-color);
+    color: #0A100D;
+    padding: 1rem 0.5rem;
+    border-radius: 1.5rem;
+    text-align: center;
+    transition: background-color 200ms;
+    cursor: pointer;
+}
+
+.chat-bubble:hover {
+    background-color: var(--bubble-color-hover);
+}

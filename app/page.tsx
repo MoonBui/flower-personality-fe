@@ -2,7 +2,7 @@
 
 
 import { useState } from "react";
-import { PhoneScreen, ChatBubble, ChatOptions } from "./components";
+import { PhoneScreen, ChatBubble, ChatOptions, ChatDisplay, Header } from "./components";
 import { ReactNode } from "react";
 
 export default function Home() {
@@ -15,7 +15,15 @@ export default function Home() {
   return (
     <div className="h-dvh pt-4 bg-[#fcf5c4]">
       <PhoneScreen>
-        <ChatOptions children={chatChoices} />
+        <div className="flex flex-col">
+          <Header 
+            avatar="./globe.svg"
+            name="Placeholder"
+            lineColor="blush"
+          />
+          <ChatDisplay/>
+          <ChatOptions children={chatChoices} />
+        </div>
       </PhoneScreen>
     </div>
   );

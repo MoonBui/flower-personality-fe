@@ -4,18 +4,34 @@ interface ChatBubbleProps {
 }
 
 const COLOR_CHOICE = {
-    "blush": "FAC1B3",
-    "ice": "ADD6FF",
-    "sage": "9BBFA7"
+    "npc": {
+        base: " D6D9BF",
+        hover: "D6D9BF"
+    },  
+    "blush": {
+        base: "fde0d9",
+        hover: "FAC1B3"
+    },
+    "ice": {
+        base: "ADD6FF",
+        hover: "CDE5FD"
+    },
+    "sage": {
+        base: "9BBFA7",
+        hover: "DAE7DE"
+    }
 } as const;
 
 const ChatBubble = ({bgColor, text}: ChatBubbleProps) => {
-    const hexColor = COLOR_CHOICE[bgColor];
+    const bGBubColor = COLOR_CHOICE[bgColor];
     
     return (
         <div 
-            className="text-[#0A100D] text-center py-2 px-4 rounded-2xl"
-            style={{ backgroundColor: `#${hexColor}` }}
+            className="chat-bubble"
+            style={{ 
+                '--bubble-color': `#${bGBubColor.base}`,
+                '--bubble-color-hover': `#${bGBubColor.hover}`
+             } as React.CSSProperties}
         >
             {text}
         </div>
