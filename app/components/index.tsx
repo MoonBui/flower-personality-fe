@@ -1,7 +1,7 @@
 import PhoneScreen from "./PhoneScreen";
-import ChatBubble from "./ChatBubble";
 import ChatOptions from "./ChatOptions";
+import ChatOptionsDisplay from "./ChatOptionsDisplay";
 import Header from "./Header"
 import ChatDisplay from "./ChatDisplay";
 
-export {PhoneScreen, ChatBubble, ChatOptions, Header, ChatDisplay};
+export {PhoneScreen, ChatOptions, ChatOptionsDisplay, Header, ChatDisplay};

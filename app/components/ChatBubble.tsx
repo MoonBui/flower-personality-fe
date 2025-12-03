@@ -1,36 +1,53 @@
 interface ChatBubbleProps {
     bgColor: keyof typeof COLOR_CHOICE;
     text: string;
+    type: string;
+    
 }
 
+// const COLOR_CHOICE = {
+//     "npc": {
+//         base: " D6D9BF",
+//         hover: "D6D9BF"
+//     },  
+//     "blush": {
+//         base: "fde0d9",
+//         hover: "FAC1B3"
+//     },
+//     "ice": {
+//         base: "ADD6FF",
+//         hover: "CDE5FD"
+//     },
+//     "sage": {
+//         base: "9BBFA7",
+//         hover: "DAE7DE"
+//     }
+// } as const;
+
 const COLOR_CHOICE = {
-    "npc": {
-        base: " D6D9BF",
-        hover: "D6D9BF"
+    "beige": {
+        base: "D6D9BF"
     },  
     "blush": {
-        base: "fde0d9",
-        hover: "FAC1B3"
+        base: "FAC1B3"
     },
     "ice": {
-        base: "ADD6FF",
-        hover: "CDE5FD"
+        base: "ADD6FF"
     },
     "sage": {
-        base: "9BBFA7",
-        hover: "DAE7DE"
+        base: "DAE7DE"
     }
 } as const;
 
-const ChatBubble = ({bgColor, text}: ChatBubbleProps) => {
+const ChatBubble = ({bgColor, text, type}: ChatBubbleProps) => {
     const bGBubColor = COLOR_CHOICE[bgColor];
+    const align = (type==="npc") ? "text-left" : "text-justify";
     
     return (
         <div 
-            className="chat-bubble"
+            className={`chat-bubble ${align}`}
             style={{ 
                 '--bubble-color': `#${bGBubColor.base}`,
-                '--bubble-color-hover': `#${bGBubColor.hover}`
              } as React.CSSProperties}
         >
             {text}

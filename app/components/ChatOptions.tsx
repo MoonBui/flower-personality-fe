@@ -1,17 +1,13 @@
-import ChatBubble from "./ChatBubble"
-import { ReactNode } from "react"
-
 interface ChatOptionsProps {
-    children: ReactNode
+    text: string;
 }
 
-const ChatOptions = ({children}: ChatOptionsProps) => {
+const ChatOptions = ({text}: ChatOptionsProps) => {    
     return (
-    <div className="flex flex-col gap-3 p-4">
-        {children}
-    </div>
+        <div className="chat-option">
+            {text}
+        </div>
     )
-
-}
+};
 
 export default ChatOptions;

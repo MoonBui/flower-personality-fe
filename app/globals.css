@@ -31,15 +31,22 @@ body {
 
 .chat-display {
   padding: 1rem;
-  height: calc(100% - 170px);
-  overflow-y: auto;
+  flex: 1;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-.chat-bubble {
-    background-color: var(--bubble-color);
+.chat-display::-webkit-scrollbar{
+  display: none;
+}
+
+.chat-option {
+    background-color: #CDE5FD;
     color: #0A100D;
     padding: 1rem 0.5rem;
     border-radius: 1.5rem;
@@ -48,6 +55,14 @@ body {
     cursor: pointer;
 }
 
-.chat-bubble:hover {
-    background-color: var(--bubble-color-hover);
+.chat-option:hover {
+    background-color: #ADD6FF;
+}
+
+.chat-bubble {
+  background-color: var(--bubble-color);
+    color: #0A100D;
+    padding: 1rem;
+    border-radius: 1.5rem;
+    max-width: 70%;
 }

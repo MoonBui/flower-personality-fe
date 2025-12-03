@@ -21,7 +21,7 @@ const Header = ({avatar, name, lineColor}: HeaderProps) => {
                 <img 
                     src={avatar} 
                     alt={`${name} avatar`}
-                    className="w-10 h-10 rounded-full object-cover flex-shrink-0"
+                    className="w-8 h-8 rounded-full object-cover flex-shrink-0"
                 />
             )}
             <span className="font-semibold">{name}</span>
