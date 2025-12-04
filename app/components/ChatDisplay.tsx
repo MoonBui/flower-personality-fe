@@ -1,24 +1,25 @@
 import { ReactNode, useState } from "react";
 import ChatBubble from "./ChatBubble";
+import { Message } from "../types/quiz";
 
 interface ChatDisplayProps {
-    npcDiaLog: string
-    userDiagLog: string
+    messages: Message[];
 }
 
-const ChatDisplay = ({npcDiaLog, userDiagLog}: ChatDisplayProps) => {
-    const [npcDiaLogList, setNpcDialogList] = useState([]);
-    const [userDiagLogList, setUserDialogList] = useState([]);
+const ChatDisplay = ({messages}: ChatDisplayProps) => {
     return (
         <div className="chat-display flex-stretch gap-6">
-            <div className="flex justify-start">
-                <ChatBubble bgColor="beige" text={npcDiaLog} type="npc"/>
-            </div>
-            <div className="flex justify-end">
-                <ChatBubble bgColor="ice" text={userDiagLog} type="user"/>
-            </div>
+            {messages.map(msg => (
+                <div className={`${msg.type === "npc" ? "flex justify-start" : "flex justify-end"}`} key={msg.id}>
+                    <ChatBubble 
+                        bgColor={msg.type === "npc" ? "beige" : "ice"} 
+                        text={msg.text} 
+                        type={msg.type} 
+                    />
+                </div>
+            ))};
         </div>
-    )
-}
+    );
+};
 
 export default ChatDisplay;

@@ -1,12 +1,15 @@
+import { on } from "events";
+
 interface ChatOptionsProps {
     text: string;
+    onClick: () => void;
 }
 
-const ChatOptions = ({text}: ChatOptionsProps) => {    
+const ChatOptions = ({text, onClick}: ChatOptionsProps) => {    
     return (
-        <div className="chat-option">
+        <button className="chat-option" onClick={onClick}>
             {text}
-        </div>
+        </button>
     )
 };
 
