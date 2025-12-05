@@ -16,24 +16,29 @@ export default function Home() {
     }
   ]);
 
-  const [choice, setChoices] = useState([
-    {id: "choice1", text: "Oh you're the florist?"},
-    {id: "choice2", text: "Who are you again?"},
-    {id: "choice3", text: "Hi bestie!!"},
-  ]);
-
   const addMessage = (text: string, type: "npc" | "user") => {
     const newMessage: Message = {
       id: Date.now(),
       type,
       text
     };
-    setMessages([...message, newMessage]);
+    setMessages(previous => {
+      return [...previous, newMessage]
+    });
   };
 
+    const [choice, setChoices] = useState([
+    {id: "choice1", text: "Oh you're the florist?"},
+    {id: "choice2", text: "Who are you again?"},
+    {id: "choice3", text: "Hi bestie!!"},
+  ]);
+  
   const handleChoice = (choiceText: string) => {
     addMessage(choiceText, "user");
-    console.log("User selected:", choiceText);
+    setTimeout(() => {
+      addMessage("Wow what an interesting person you be!", "npc");
+    }, 1000);
+    console.log("messages so far:", message);
   }
 
   return (
