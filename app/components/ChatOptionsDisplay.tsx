@@ -1,20 +1,19 @@
-import { ReactNode } from "react"
-import { Choice } from "../types/quiz"
+import { Choice, ChoiceOption } from "../types/quiz"
 import ChatOptions from "./ChatOptions";
 
 interface ChatOptionsDisplayProps {
-    choices: Choice[];
-    onChoiceClick: (choiceText: string) => void;
+    choice: Choice;
+    onChoiceClick: (choiceOption: ChoiceOption) => void;
 }
 
-const ChatOptionsDisplay = ({choices, onChoiceClick}: ChatOptionsDisplayProps) => {
+const ChatOptionsDisplay = ({choice, onChoiceClick}: ChatOptionsDisplayProps) => {
     return (
-    <div className="flex flex-col gap-3 px-4 -mb-3">
-        {choices.map(choice => (
+    <div className="flex flex-col gap-3 pt-4 px-4 -mb-3">
+        {choice.options.map(option => (
             <ChatOptions
-                key={choice.id}
-                text={choice.text}
-                onClick={() => onChoiceClick(choice.text)}
+                key={option.id}
+                text={option.text}
+                onClick={() => onChoiceClick(option)}
             />
         ))};
     </div>

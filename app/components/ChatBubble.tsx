@@ -41,11 +41,10 @@ const COLOR_CHOICE = {
 
 const ChatBubble = ({bgColor, text, type}: ChatBubbleProps) => {
     const bGBubColor = COLOR_CHOICE[bgColor];
-    const align = (type==="npc") ? "text-left" : "text-justify";
     
     return (
         <div 
-            className={`chat-bubble ${align}`}
+            className={`chat-bubble`}
             style={{ 
                 '--bubble-color': `#${bGBubColor.base}`,
              } as React.CSSProperties}

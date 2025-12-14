@@ -2,19 +2,14 @@
 
 
 import { useState } from "react";
-import { PhoneScreen, ChatOptions, ChatOptionsDisplay, ChatDisplay, Header } from "./components";
-import { ReactNode } from "react";
-import { Message } from "./types/quiz";
+import { PhoneScreen, ChatOptionsDisplay, ChatDisplay, Header } from "./components";
+import { Message, Choice, ChoiceOption } from "./types/quiz";
+import { FLOW_STORE_DATA } from "./Scripts/FlowerStoreScript";
 
 
 export default function Home() {
-  const [message, setMessages] = useState<Message[]>([
-    { 
-      id: 1, 
-      type: 'npc', 
-      text: "Good morning! The sun rises over your garden. What calls to you first?" 
-    }
-  ]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [message, setMessages] = useState<Message[]>([FLOW_STORE_DATA[currentIndex]]);
 
   const addMessage = (text: string, type: "npc" | "user") => {
     const newMessage: Message = {
@@ -27,19 +22,51 @@ export default function Home() {
     });
   };
 
-    const [choice, setChoices] = useState([
-    {id: "choice1", text: "Oh you're the florist?"},
-    {id: "choice2", text: "Who are you again?"},
-    {id: "choice3", text: "Hi bestie!!"},
-  ]);
-  
-  const handleChoice = (choiceText: string) => {
-    addMessage(choiceText, "user");
+  const [choice, setChoices] = useState<Choice>(
+    FLOW_STORE_DATA[currentIndex].choices!
+  );
+
+  const sendNPCMessage = (index: number) => {
+    const message = FLOW_STORE_DATA[index];
+    if (!message) return;
+
+    addMessage(message.text, "npc");
+    setCurrentIndex(index);
+
+    if (message.choices) {
+      setChoices(message.choices);
+      return;
+    } else {
+      setTimeout(() => {
+        sendNPCMessage(index + 1);
+      }, 1000);
+    }
+
+  };
+
+  const sendUserChoiceWithFollowUps = (mainText: string, additionalText?: string[]) => {
+    // Send main text immediately
+    addMessage(mainText, "user");
+    
+    // If there's additional text, send it recursively with delays
+    const sendAdditionalRecursively = (index: number) => {
+      if (!additionalText || index >= additionalText.length) return;
+      
+      setTimeout(() => {
+        addMessage(additionalText[index], "user");
+        sendAdditionalRecursively(index + 1);
+      }, 1000);
+    };
+    sendAdditionalRecursively(0);
+};
+
+
+  const handleChoice = (choiceOption: ChoiceOption) => {
+    sendUserChoiceWithFollowUps(choiceOption.text, choiceOption.additionalText);
     setTimeout(() => {
-      addMessage("Wow what an interesting person you be!", "npc");
-    }, 1000);
-    console.log("messages so far:", message);
-  }
+      sendNPCMessage(currentIndex+1);
+      }, 1000);
+    };
 
   return (
     <div className="h-dvh pt-4 bg-[#fcf5c4]">
@@ -53,7 +80,7 @@ export default function Home() {
           <ChatDisplay
             messages={message}
           />
-          <ChatOptionsDisplay choices={choice} onChoiceClick={handleChoice} />
+          <ChatOptionsDisplay choice={choice} onChoiceClick={handleChoice} />
         </div>
       </PhoneScreen>
     </div>

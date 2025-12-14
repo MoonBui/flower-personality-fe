@@ -1,5 +1,3 @@
-import { on } from "events";
-
 interface ChatOptionsProps {
     text: string;
     onClick: () => void;

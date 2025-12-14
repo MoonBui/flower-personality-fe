@@ -5,6 +5,14 @@ export interface Message {
 }
 
 export interface Choice {
+  conversation: 'flowerStore' | 'friend' | 'guardian';
   id: string;
+  options: ChoiceOption[];
+}
+
+export interface ChoiceOption {
+  id: string;
+  score: number;
   text: string;
+  additionalText?: string[];
 }
