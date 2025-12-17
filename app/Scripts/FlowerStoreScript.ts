@@ -2,8 +2,8 @@ import { Message, Choice } from "../types/quiz";
 import { flowerStoreChoices } from "./FlowStoreChoices";
 
 export interface FlowStoreScript extends Message {
-    type: 'npc';
-    choices?: Choice;
+  type: "npc";
+  choices?: Choice;
 }
 
 export const FLOW_STORE_DATA: FlowStoreScript[] = [
@@ -11,9 +11,9 @@ export const FLOW_STORE_DATA: FlowStoreScript[] = [
     id: 1,
     text: "Hello! This is Moon from Build-A-Garden. You left a voicemail asking for our services. Is now a good time to chat?",
     choices: {
-      conversation: 'flowerStore',
+      conversation: "flowerStore",
       id: "1",
-      options: flowerStoreChoices[0]
+      options: flowerStoreChoices[0],
     },
     type: "npc" as const,
   },
@@ -32,20 +32,20 @@ export const FLOW_STORE_DATA: FlowStoreScript[] = [
     text: "Essentially something that will reflect you and best suit your lifestyle! Hope that sounds good!",
     type: "npc" as const,
     choices: {
-      conversation: 'flowerStore',
+      conversation: "flowerStore",
       id: "2",
-      options: flowerStoreChoices[1]
-    }
+      options: flowerStoreChoices[1],
+    },
   },
   {
     id: 5,
     text: "Amazing, let's get things started. First things first, will this be your first garden?",
     type: "npc" as const,
     choices: {
-      conversation: 'flowerStore',
+      conversation: "flowerStore",
       id: "3",
-      options: flowerStoreChoices[2]
-    }
+      options: flowerStoreChoices[2],
+    },
   },
   {
     id: 6,
@@ -62,20 +62,20 @@ export const FLOW_STORE_DATA: FlowStoreScript[] = [
     text: "How often will you be able to tend to the garden?",
     type: "npc" as const,
     choices: {
-      conversation: 'flowerStore',
+      conversation: "flowerStore",
       id: "4",
-      options: flowerStoreChoices[3]
-    }
+      options: flowerStoreChoices[3],
+    },
   },
   {
     id: 9,
     text: "Are you thinking of something more low maintenance or are you able to dedicate some extra care to this?",
     type: "npc" as const,
     choices: {
-      conversation: 'flowerStore',
+      conversation: "flowerStore",
       id: "5",
-      options: flowerStoreChoices[4]
-    }
+      options: flowerStoreChoices[4],
+    },
   },
   {
     id: 10,
@@ -87,20 +87,20 @@ export const FLOW_STORE_DATA: FlowStoreScript[] = [
     text: "How much space will we be able to use for this project?",
     type: "npc" as const,
     choices: {
-      conversation: 'flowerStore',
+      conversation: "flowerStore",
       id: "6",
-      options: flowerStoreChoices[5]
-    }
+      options: flowerStoreChoices[5],
+    },
   },
   {
     id: 12,
     text: "I have a couple of pics here from past clients. Which style are you drawn to the most?",
     type: "npc" as const,
     choices: {
-      conversation: 'flowerStore',
+      conversation: "flowerStore",
       id: "7",
-      options: flowerStoreChoices[6]
-    }
+      options: flowerStoreChoices[6],
+    },
   },
   {
     id: 13,
@@ -112,10 +112,10 @@ export const FLOW_STORE_DATA: FlowStoreScript[] = [
     text: "I almost forgot, what does your budget look like for this project?",
     type: "npc" as const,
     choices: {
-      conversation: 'flowerStore',
+      conversation: "flowerStore",
       id: "8",
-      options: flowerStoreChoices[7]
-    }
+      options: flowerStoreChoices[7],
+    },
   },
   {
     id: 15,

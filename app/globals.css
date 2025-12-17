@@ -44,29 +44,29 @@ body {
   justify-content: flex-end;
 }
 
-.chat-display::-webkit-scrollbar{
+.chat-display::-webkit-scrollbar {
   display: none;
 }
 
 .chat-option {
-    background-color: #CDE5FD;
-    color: #0A100D;
-    padding: 1rem 0.5rem;
-    border-radius: 1.5rem;
-    text-align: center;
-    transition: background-color 200ms;
-    cursor: pointer;
+  background-color: white;
+  color: #0a100d;
+  padding: 1rem 0.5rem;
+  border-radius: 1.5rem;
+  text-align: center;
+  transition: background-color 200ms;
+  cursor: pointer;
 }
 
 .chat-option:hover {
-    background-color: #ADD6FF;
+  background-color: #add6ff;
 }
 
 .chat-bubble {
   background-color: var(--bubble-color);
-    color: #0A100D;
-    padding: 1rem;
-    border-radius: 1.5rem;
-    max-width: 70%;
-    text-align: left;
+  color: #0a100d;
+  padding: 1rem;
+  border-radius: 1.5rem;
+  max-width: 70%;
+  text-align: left;
 }

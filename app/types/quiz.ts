@@ -1,11 +1,11 @@
 export interface Message {
   id: number;
-  type: 'npc' | 'user';
+  type: "npc" | "user";
   text: string;
 }
 
 export interface Choice {
-  conversation: 'flowerStore' | 'friend' | 'guardian';
+  conversation: "flowerStore" | "friend" | "guardian";
   id: string;
   options: ChoiceOption[];
 }
