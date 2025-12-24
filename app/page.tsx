@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, ReactNode } from "react";
 import {
   PhoneScreen,
   ChatOptionsDisplay,
   ChatDisplay,
   Header,
+  Notification,
 } from "./components";
 import { Message, Choice, ChoiceOption } from "./types/quiz";
 import { FLOW_STORE_DATA } from "./Scripts/FlowerStoreScript";
@@ -82,12 +83,32 @@ export default function Home() {
     }, 1000);
   };
 
+  const sendNotification = () => {
+    console.log("sendNotification");
+    setTimeout(() => {
+      return (
+        <Notification
+          avatar="./globe.svg"
+          title="Placeholder"
+          message="Placeholder"
+        />
+      );
+    }, 2000);
+  };
+
   return (
     <div className="h-dvh pt-4 bg-[#fcf5c4]">
       <PhoneScreen>
         <div className="flex flex-col h-full">
+          {currentIndex === FLOW_STORE_DATA.length - 1 &&
+            (sendNotification() as ReactNode)}
+          {/* <Notification avatar="./globe.svg" title="Placeholder" message="Placeholder" /> */}
+
           <Header avatar="./globe.svg" name="Placeholder" lineColor="sage" />
-          <ChatDisplay messages={message} showChatOptionsDisplay={showChatOptionsDisplay} />
+          <ChatDisplay
+            messages={message}
+            showChatOptionsDisplay={showChatOptionsDisplay}
+          />
           {showChatOptionsDisplay && (
             <ChatOptionsDisplay choice={choice} onChoiceClick={handleChoice} />
           )}

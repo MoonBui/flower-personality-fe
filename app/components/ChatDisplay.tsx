@@ -7,7 +7,10 @@ interface ChatDisplayProps {
   showChatOptionsDisplay?: boolean;
 }
 
-const ChatDisplay = ({ messages, showChatOptionsDisplay }: ChatDisplayProps) => {
+const ChatDisplay = ({
+  messages,
+  showChatOptionsDisplay,
+}: ChatDisplayProps) => {
   const messageEndRef = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {
     messageEndRef.current?.scrollIntoView({ behavior: "auto", block: "end" });

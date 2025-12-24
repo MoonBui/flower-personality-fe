@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 
 interface PhoneScreenProps {
   bgColor?: string;
-  children: ReactElement;
+  children: ReactElement | VoidFunction;
 }
 
 const PhoneScreen = ({ bgColor = "bg-white", children }: PhoneScreenProps) => {
