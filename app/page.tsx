@@ -87,7 +87,7 @@ export default function Home() {
 
   // Refactor in the future, this only need to set to true, will pass an onclick to Notification component
   // Onclick will reset state to false
-  const sendNotification = (index:number) => {
+  const sendNotification = (index: number) => {
     console.log(showNotification, index, FLOW_STORE_DATA.length);
     if (index === FLOW_STORE_DATA.length - 1) {
       setTimeout(() => {
@@ -104,7 +104,11 @@ export default function Home() {
       <PhoneScreen>
         <div className="flex flex-col h-full">
           {true && (
-            <Notification avatar="./globe.svg" title="Placeholder" message="Placeholder" />
+            <Notification
+              avatar="./globe.svg"
+              title="Placeholder"
+              message="Placeholder"
+            />
           )}
 
           <Header avatar="./globe.svg" name="Placeholder" lineColor="sage" />
