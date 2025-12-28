@@ -10,7 +10,7 @@ const Notification = ({ avatar, title, message }: NotificationProps) => {
       <img
         src={avatar}
         alt="avatar"
-        className="w-8 h-8 rounded-full object-cover flex-shrink-0"
+        className="w-8 h-8 rounded-full object-cover"
       />
       <div className="flex flex-col">
         <span className="font-semibold">{title}</span>

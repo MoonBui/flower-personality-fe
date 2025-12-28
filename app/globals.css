@@ -83,9 +83,9 @@ body {
   border-radius: 1.5rem;
   z-index: 3;
   position: absolute;
-  width: 80%;
+  width: 343px;
   height: 4.5rem;
-  top: 3%;
+  top: 4%;
   left: 50%;
   transform: translateX(-50%);
 }

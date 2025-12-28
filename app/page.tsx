@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, ReactNode } from "react";
+import { useState } from "react";
 import {
   PhoneScreen,
   ChatOptionsDisplay,
@@ -17,6 +17,7 @@ export default function Home() {
     FLOW_STORE_DATA[currentIndex],
   ]);
   const [showChatOptionsDisplay, setShowChatOptionsDisplay] = useState(true);
+  const [showNotification, setShowNotification] = useState(false);
 
   const addMessage = (text: string, type: "npc" | "user") => {
     const newMessage: Message = {
@@ -49,6 +50,7 @@ export default function Home() {
         sendNPCMessage(index + 1);
       }, 1000);
     }
+    sendNotification(index);
   };
 
   const sendUserChoiceWithFollowUps = async (
@@ -83,26 +85,27 @@ export default function Home() {
     }, 1000);
   };
 
-  const sendNotification = () => {
-    console.log("sendNotification");
-    setTimeout(() => {
-      return (
-        <Notification
-          avatar="./globe.svg"
-          title="Placeholder"
-          message="Placeholder"
-        />
-      );
-    }, 2000);
+  // Refactor in the future, this only need to set to true, will pass an onclick to Notification component
+  // Onclick will reset state to false
+  const sendNotification = (index:number) => {
+    console.log(showNotification, index, FLOW_STORE_DATA.length);
+    if (index === FLOW_STORE_DATA.length - 1) {
+      setTimeout(() => {
+        setShowNotification(true);
+      }, 2000);
+      setShowNotification(true);
+    } else {
+      setShowNotification(false);
+    }
   };
 
   return (
     <div className="h-dvh pt-4 bg-[#fcf5c4]">
       <PhoneScreen>
         <div className="flex flex-col h-full">
-          {currentIndex === FLOW_STORE_DATA.length - 1 &&
-            (sendNotification() as ReactNode)}
-          {/* <Notification avatar="./globe.svg" title="Placeholder" message="Placeholder" /> */}
+          {true && (
+            <Notification avatar="./globe.svg" title="Placeholder" message="Placeholder" />
+          )}
 
           <Header avatar="./globe.svg" name="Placeholder" lineColor="sage" />
           <ChatDisplay
