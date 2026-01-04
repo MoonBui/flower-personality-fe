@@ -2,11 +2,12 @@ interface NotificationProps {
   avatar: string;
   title: string;
   message: string;
+  onClick: () => void;
 }
 
-const Notification = ({ avatar, title, message }: NotificationProps) => {
+const Notification = ({ avatar, title, message, onClick }: NotificationProps) => {
   return (
-    <div className="notification">
+    <button className="notification" onClick={onClick}>
       <img
         src={avatar}
         alt="avatar"
@@ -16,7 +17,7 @@ const Notification = ({ avatar, title, message }: NotificationProps) => {
         <span className="font-semibold">{title}</span>
         <span className="text-sm ">{message}</span>
       </div>
-    </div>
+    </button>
   );
 };
 

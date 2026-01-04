@@ -10,6 +10,7 @@ import {
 } from "./components";
 import { Message, Choice, ChoiceOption } from "./types/quiz";
 import { FLOW_STORE_DATA } from "./Scripts/FlowerStoreScript";
+import { FRIEND_CHAT_DATA } from "./Scripts/FriendScript";
 
 export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -18,6 +19,12 @@ export default function Home() {
   ]);
   const [showChatOptionsDisplay, setShowChatOptionsDisplay] = useState(true);
   const [showNotification, setShowNotification] = useState(false);
+  const [currentConversation, setCurrentConversation] = useState<string>(
+    "flowerStore",
+  );
+    const [choice, setChoices] = useState<Choice>(
+    FLOW_STORE_DATA[currentIndex].choices!,
+  );
 
   const addMessage = (text: string, type: "npc" | "user") => {
     const newMessage: Message = {
@@ -29,10 +36,6 @@ export default function Home() {
       return [...previous, newMessage];
     });
   };
-
-  const [choice, setChoices] = useState<Choice>(
-    FLOW_STORE_DATA[currentIndex].choices!,
-  );
 
   const sendNPCMessage = (index: number) => {
     const message = FLOW_STORE_DATA[index];
@@ -85,6 +88,29 @@ export default function Home() {
     }, 1000);
   };
 
+  const handleSwitchConversation = (conversation: string) => {
+    // Placeholder for switching conversation logic
+    console.log(`Switching to conversation: ${conversation}`);
+    switch (conversation) {
+      case "flowerStore":
+        // Logic to switch to flower store conversation
+        break;
+      case "friend":
+        // Logic to switch to friend conversation
+        setCurrentIndex(0);
+        setMessages(FRIEND_CHAT_DATA.slice(0, 1));
+        setCurrentConversation("friend");
+        // Adjustment to choices logic needed because right now choices is being tied to sendNPCMessage
+        // setChoices(FRIEND_CHAT_DATA[currentIndex].choices!);
+        break;
+      case "guardian":
+        // Logic to switch to guardian conversation
+        break;
+      default:
+        break;
+    }
+  }
+
   // Refactor in the future, this only need to set to true, will pass an onclick to Notification component
   // Onclick will reset state to false
   const sendNotification = (index: number) => {
@@ -108,6 +134,7 @@ export default function Home() {
               avatar="./globe.svg"
               title="Placeholder"
               message="Placeholder"
+              onClick={()=> handleSwitchConversation("friend")}
             />
           )}
 
