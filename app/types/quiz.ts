@@ -2,6 +2,7 @@ export interface Message {
   id: number;
   type: "npc" | "user";
   text: string;
+  choices?: Choice;
 }
 
 export interface Choice {

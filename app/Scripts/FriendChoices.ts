@@ -6,7 +6,9 @@ const question1Choices: ChoiceOption[] = [
     id: "1.1",
     score: 0,
     text: "Hell yeah!",
-    additionalText: ["I've been itching for booze and distractions from my existential dread 🫠🫠"],
+    additionalText: [
+      "I've been itching for booze and distractions from my existential dread 🫠🫠",
+    ],
   },
   {
     id: "1.2",
@@ -57,7 +59,9 @@ const question3Choices: ChoiceOption[] = [
     id: "3.1",
     score: 0,
     text: "Nothing in particular",
-    additionalText: ["Other than the insatiable crave for money and power 💅✨"],
+    additionalText: [
+      "Other than the insatiable crave for money and power 💅✨",
+    ],
   },
   {
     id: "3.2",

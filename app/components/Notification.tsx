@@ -5,7 +5,12 @@ interface NotificationProps {
   onClick: () => void;
 }
 
-const Notification = ({ avatar, title, message, onClick }: NotificationProps) => {
+const Notification = ({
+  avatar,
+  title,
+  message,
+  onClick,
+}: NotificationProps) => {
   return (
     <button className="notification" onClick={onClick}>
       <img

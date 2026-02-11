@@ -12,6 +12,12 @@
   --font-mono: var(--font-geist-mono);
 }
 
+@theme {
+  --color-chat-display-dark-blue: #add6ff;
+  --color-chat-display-mid-blue: #cde5fd;
+  --color-chat-display-light-blue: #f5faff;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -49,8 +55,11 @@ body {
 }
 
 .chat-option {
-  background-color: white;
+  background-color: #f5faff;
   color: #0a100d;
+  border-style: solid;
+  border-color: transparent;
+  border-width: 1.5px;
   padding: 1rem 0.5rem;
   border-radius: 1.5rem;
   text-align: center;
@@ -60,7 +69,9 @@ body {
 }
 
 .chat-option:hover {
-  background-color: #add6ff;
+  background-color: transparent;
+  border-color: #dae7de;
+  /* background-color: linear-gradient(to right, #add6ff, #cde5fd); */
 }
 
 .chat-bubble {

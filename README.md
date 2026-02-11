@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+```mermaid
+    graph TD
+        Start([App Loads]) --> Init[Initialize State<br/>currentIndex: 0<br/>messages: FLOW_STORE_DATA0<br/>showChatOptionsDisplay: true]
 
-## Getting Started
+        Init --> Display[Render Components]
 
-First, run the development server:
+        Display --> Header[Header Component]
+        Display --> ChatDisplay[ChatDisplay Component<br/>Shows all messages]
+        Display --> Options{showChatOptionsDisplay?}
+        Display --> Notif{showNotification?}
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+        Options -->|true| ShowOptions[ChatOptionsDisplay<br/>Shows available choices]
+        Options -->|false| HideOptions[Options Hidden]
+
+        Notif -->|true| ShowNotif[Notification Component]
+        Notif -->|false| HideNotif[No Notification]
+
+        ShowOptions --> UserClick[User Clicks Choice]
+
+        UserClick --> HandleChoice[handleChoice]
+        HandleChoice --> HideOpt[setShowChatOptionsDisplay false]
+        HideOpt --> SendUser[sendUserChoiceWithFollowUps]
+
+        SendUser --> AddUserMsg[addMessage main text]
+        AddUserMsg --> MoreText{Has additionalText?}
+
+        MoreText -->|yes| RecurseUser[sendAdditionalRecursively<br/>Add messages with 1s delay]
+        MoreText -->|no| WaitUser[await completes]
+        RecurseUser --> WaitUser
+
+        WaitUser --> Delay1s[setTimeout 1000ms]
+        Delay1s --> SendNPC[sendNPCMessage currentIndex + 1]
+
+        SendNPC --> CheckMsg{message exists?}
+        CheckMsg -->|no| End([Return])
+        CheckMsg -->|yes| AddNPCMsg[addMessage NPC text<br/>setCurrentIndex index]
+
+        AddNPCMsg --> HasChoices{message.choices?}
+
+        HasChoices -->|yes| SetChoices[setChoices<br/>setTimeout 1s then<br/>setShowChatOptionsDisplay true]
+        HasChoices -->|no| NextNPC[setTimeout 1s<br/>sendNPCMessage index + 1]
+
+        SetChoices --> CheckNotif[sendNotification index]
+        NextNPC --> CheckNotif
+
+        CheckNotif --> IsLast{index === length - 1?}
+        IsLast -->|yes| ShowNotification[setShowNotification true<br/>after 2s delay]
+        IsLast -->|no| HideNotification[setShowNotification false]
+
+        ShowNotification --> Display
+        HideNotification --> Display
+        SetChoices --> Display
+        NextNPC --> SendNPC
+
+        style Start fill:#e1f5e1
+        style End fill:#ffe1e1
+        style UserClick fill:#fff4e1
+        style SendNPC fill:#e1f0ff
+        style Display fill:#f0e1ff
+        style CheckNotif fill:#ffe1f0
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

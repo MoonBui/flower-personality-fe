@@ -25,7 +25,7 @@ const ChatDisplay = ({
             key={msg.id}
           >
             <ChatBubble
-              bgColor={msg.type === "npc" ? "beige" : "ice"}
+              bgColor={msg.type === "npc" ? "sage" : "ice"}
               text={msg.text}
               type={msg.type}
             />
