@@ -169,6 +169,17 @@ export function useConversationManager() {
     }, 1000);
   };
 
+  const switchConversation = (newConversationId: conversationIds) => {
+    setAppState((prev) => ({
+      ...prev,
+      currentConversation: newConversationId,
+    }));
+    sendNPCMessage(
+      appState.conversations[newConversationId].currentIndex,
+      newConversationId,
+    );
+  };
+
   // Persistence
   useEffect(() => {
     // Auto-save to localStorage whenever state changes
@@ -185,12 +196,11 @@ export function useConversationManager() {
       appState.conversations[currentConversation].showChatOptionsDisplay,
 
     // Actions
-    // switchConversation,
+    switchConversation,
     sendNPCMessage,
     addMessageToConversation,
     sendUserChoiceWithFollowUps,
     handleChoice,
-    // addMessage: (text, type) => addMessageToConversation(appState.currentConversation, { text, type }),
 
     // Utilities
     // resetConversation: (id) => { /* */ },

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   PhoneScreen,
   ChatOptionsDisplay,
@@ -9,6 +9,7 @@ import {
   Notification,
 } from "./components";
 import { useConversationManager } from "./customHook/useConversationManager";
+import { useThemeUIManager, COLOR_THEME } from "./customHook/useThemeUIManager";
 
 export default function Home() {
   // const [currentIndex, setCurrentIndex] = useState(0);
@@ -53,16 +54,14 @@ export default function Home() {
   //   sendNotification(index);
   // };
   const {
-    currentConversation,
     messages,
     choices,
     showChatOptions: showChatOptionsDisplay,
-    sendNPCMessage,
-    addMessageToConversation,
-    sendUserChoiceWithFollowUps,
     handleChoice,
-    isConversationComplete,
+    switchConversation,
   } = useConversationManager();
+
+  const { currentTheme, toggleTheme } = useThemeUIManager();
 
   const [showNotification, setShowNotification] = useState(false);
 
@@ -139,27 +138,41 @@ export default function Home() {
   //   // Start sending messages from index 1 (since index 0 is already in initial state)
   //   sendNPCMessage(1);
   // }, []);
+  console.log(COLOR_THEME[currentTheme].chatGradient);
 
   return (
     <div className="h-dvh pt-4 bg-[#fcf5c4]">
       <PhoneScreen>
         <div className="flex flex-col h-full">
-          {/* {true && (
+          {true && (
             <Notification
               avatar="./globe.svg"
               title="Placeholder"
               message="Placeholder"
-              onClick={() => {}}
+              onClick={() => {
+                switchConversation("friend");
+                toggleTheme("friend");
+                setShowNotification(false);
+              }}
             />
-          )} */}
+          )}
 
-          <Header avatar="./globe.svg" name="Placeholder" lineColor="sage" />
+          <Header
+            avatar="./globe.svg"
+            name="Placeholder"
+            lineColor={COLOR_THEME[currentTheme].headerLine}
+          />
           <ChatDisplay
             messages={messages}
+            bubbleColor={COLOR_THEME[currentTheme].bubbleChat}
             showChatOptionsDisplay={showChatOptionsDisplay}
           />
           {showChatOptionsDisplay && (
-            <ChatOptionsDisplay choice={choices} onChoiceClick={handleChoice} />
+            <ChatOptionsDisplay
+              choice={choices}
+              onChoiceClick={handleChoice}
+              chatGradient={COLOR_THEME[currentTheme].chatGradient}
+            />
           )}
         </div>
       </PhoneScreen>

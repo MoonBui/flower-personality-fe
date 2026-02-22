@@ -18,7 +18,7 @@ const Notification = ({
         alt="avatar"
         className="w-8 h-8 rounded-full object-cover"
       />
-      <div className="flex flex-col">
+      <div className="flex flex-col text-white">
         <span className="font-semibold">{title}</span>
         <span className="text-sm ">{message}</span>
       </div>

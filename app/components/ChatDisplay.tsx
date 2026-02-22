@@ -5,11 +5,13 @@ import { Message } from "../types/quiz";
 interface ChatDisplayProps {
   messages: Message[];
   showChatOptionsDisplay?: boolean;
+  bubbleColor: string;
 }
 
 const ChatDisplay = ({
   messages,
   showChatOptionsDisplay,
+  bubbleColor,
 }: ChatDisplayProps) => {
   const messageEndRef = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {
@@ -25,7 +27,7 @@ const ChatDisplay = ({
             key={msg.id}
           >
             <ChatBubble
-              bgColor={msg.type === "npc" ? "sage" : "ice"}
+              bgColor={msg.type === "npc" ? bubbleColor : "#ADD6FF"}
               text={msg.text}
               type={msg.type}
             />

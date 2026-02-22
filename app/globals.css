@@ -70,7 +70,7 @@ body {
 
 .chat-option:hover {
   background-color: transparent;
-  border-color: #dae7de;
+  border-color: var(--border-color);
   /* background-color: linear-gradient(to right, #add6ff, #cde5fd); */
 }
 
