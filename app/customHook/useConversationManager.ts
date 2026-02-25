@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Message, Choice, ChoiceOption } from "../types/quiz";
+import { Message, ChoiceOption } from "../types/quiz";
 import {
   ConversationState,
   AppState,
@@ -7,6 +7,7 @@ import {
 } from "../types/conversationState";
 import { FLOW_STORE_DATA } from "../Scripts/FlowerStoreScript";
 import { FRIEND_CHAT_DATA } from "../Scripts/FriendScript";
+import { GUARDIAN_CHAT_DATA } from "../Scripts/GuardianScript";
 
 const INITIAL_APP_STATE: AppState = {
   currentConversation: "flowerStore",
@@ -29,10 +30,10 @@ const INITIAL_APP_STATE: AppState = {
     },
     guardian: {
       currentIndex: 0,
-      messages: [],
-      choices: null,
+      messages: [GUARDIAN_CHAT_DATA[0]],
+      choices: GUARDIAN_CHAT_DATA[0].choices || null,
       showChatOptionsDisplay: false,
-      dataSource: [],
+      dataSource: GUARDIAN_CHAT_DATA,
       isCompleted: false,
     },
   },

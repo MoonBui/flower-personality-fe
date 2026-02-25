@@ -12,9 +12,9 @@ export const COLOR_THEME = {
     chatGradient: "#fde0d9",
   },
   guardian: {
-    bubbleChat: "#D4CCD9",
-    headerLine: "",
-    chatGradient: "",
+    bubbleChat: "#DCD7EA",
+    headerLine: "#A9A0D9",
+    chatGradient: "#DCD7EA",
   },
 };
 
