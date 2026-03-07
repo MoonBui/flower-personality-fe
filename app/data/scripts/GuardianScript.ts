@@ -1,4 +1,4 @@
-import { Message, Choice } from "../types/quiz";
+import { Message, Choice } from "../../types/quiz";
 import { GuardianChoices } from "./GuardianChoices";
 
 export interface GuardianScript extends Message {

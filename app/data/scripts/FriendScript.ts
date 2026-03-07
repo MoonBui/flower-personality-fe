@@ -1,4 +1,4 @@
-import { Message, Choice } from "../types/quiz";
+import { Message, Choice } from "../../types/quiz";
 import { FriendChoices } from "./FriendChoices";
 
 export interface FriendScript extends Message {

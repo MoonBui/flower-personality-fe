@@ -8,13 +8,17 @@
     "start": "next start",
     "lint": "eslint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "diagnose": "tsx app/data/scripts/diagnoseMapping.ts",
+    "simulate": "tsx app/data/scripts/simulateQuizDistribution.ts"
   },
   "dependencies": {
     "next": "16.0.7",
     "prettier": "^3.7.4",
     "react": "19.2.1",
     "react-dom": "19.2.1",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
     "usehooks-ts": "^3.1.1"
   },
   "devDependencies": {
@@ -36,6 +40,7 @@
     "playwright": "^1.57.0",
     "storybook": "^10.1.10",
     "tailwindcss": "^4",
+    "tsx": "^4.21.0",
     "typescript": "^5",
     "vite": "^7.3.0",
     "vitest": "^4.0.16"

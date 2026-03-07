@@ -1,4 +1,4 @@
-import { ChoiceOption } from "../types/quiz";
+import { ChoiceOption } from "../../types/quiz";
 
 // Question 1: Is now a good time to chat?
 const question1Choices: ChoiceOption[] = [
@@ -170,7 +170,7 @@ const question8Choices: ChoiceOption[] = [
   },
 ];
 
-export const flowerStoreChoices = [
+export const FlowerStoreChoices = [
   question1Choices,
   question2Choices,
   question3Choices,

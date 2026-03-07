@@ -1,4 +1,4 @@
-import { ChoiceOption } from "../types/quiz";
+import { ChoiceOption } from "../../types/quiz";
 
 // Question 1: YOU IN?
 const question1Choices: ChoiceOption[] = [

@@ -1,5 +1,5 @@
-import { Message, Choice } from "../types/quiz";
-import { flowerStoreChoices } from "./FlowStoreChoices";
+import { Message, Choice } from "../../types/quiz";
+import { FlowerStoreChoices } from "./FlowStoreChoices";
 
 export interface FlowStoreScript extends Message {
   type: "npc";
@@ -13,7 +13,7 @@ export const FLOW_STORE_DATA: FlowStoreScript[] = [
     choices: {
       conversation: "flowerStore",
       id: "1",
-      options: flowerStoreChoices[0],
+      options: FlowerStoreChoices[0],
     },
     type: "npc" as const,
   },
@@ -34,7 +34,7 @@ export const FLOW_STORE_DATA: FlowStoreScript[] = [
     choices: {
       conversation: "flowerStore",
       id: "2",
-      options: flowerStoreChoices[1],
+      options: FlowerStoreChoices[1],
     },
   },
   {
@@ -44,7 +44,7 @@ export const FLOW_STORE_DATA: FlowStoreScript[] = [
     choices: {
       conversation: "flowerStore",
       id: "3",
-      options: flowerStoreChoices[2],
+      options: FlowerStoreChoices[2],
     },
   },
   {
@@ -64,7 +64,7 @@ export const FLOW_STORE_DATA: FlowStoreScript[] = [
     choices: {
       conversation: "flowerStore",
       id: "4",
-      options: flowerStoreChoices[3],
+      options: FlowerStoreChoices[3],
     },
   },
   {
@@ -74,7 +74,7 @@ export const FLOW_STORE_DATA: FlowStoreScript[] = [
     choices: {
       conversation: "flowerStore",
       id: "5",
-      options: flowerStoreChoices[4],
+      options: FlowerStoreChoices[4],
     },
   },
   {
@@ -89,7 +89,7 @@ export const FLOW_STORE_DATA: FlowStoreScript[] = [
     choices: {
       conversation: "flowerStore",
       id: "6",
-      options: flowerStoreChoices[5],
+      options: FlowerStoreChoices[5],
     },
   },
   {
@@ -99,7 +99,7 @@ export const FLOW_STORE_DATA: FlowStoreScript[] = [
     choices: {
       conversation: "flowerStore",
       id: "7",
-      options: flowerStoreChoices[6],
+      options: FlowerStoreChoices[6],
     },
   },
   {
@@ -114,7 +114,7 @@ export const FLOW_STORE_DATA: FlowStoreScript[] = [
     choices: {
       conversation: "flowerStore",
       id: "8",
-      options: flowerStoreChoices[7],
+      options: FlowerStoreChoices[7],
     },
   },
   {

@@ -8,9 +8,9 @@ import {
   AppState,
   conversationIds,
 } from "../types/conversationState";
-import { FLOW_STORE_DATA } from "../Scripts/FlowerStoreScript";
-import { FRIEND_CHAT_DATA } from "../Scripts/FriendScript";
-import { GUARDIAN_CHAT_DATA } from "../Scripts/GuardianScript";
+import { FLOW_STORE_DATA } from "../data/scripts/FlowerStoreScript";
+import { FRIEND_CHAT_DATA } from "../data/scripts/FriendScript";
+import { GUARDIAN_CHAT_DATA } from "../data/scripts/GuardianScript";
 
 const INITIAL_APP_STATE: AppState = {
   currentConversation: "flowerStore",
