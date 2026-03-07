@@ -1,4 +1,7 @@
-import { useState, useEffect } from "react";
+'use client';
+
+import { useLocalStorage } from 'usehooks-ts';
+import { useState, useEffect, use, useCallback } from "react";
 import { Message, ChoiceOption } from "../types/quiz";
 import {
   ConversationState,
@@ -14,24 +17,24 @@ const INITIAL_APP_STATE: AppState = {
   conversations: {
     flowerStore: {
       currentIndex: 0,
-      messages: [FLOW_STORE_DATA[0]],
-      choices: FLOW_STORE_DATA[0].choices || null,
+      messages: [],
+      choices: null,
       showChatOptionsDisplay: true,
       dataSource: FLOW_STORE_DATA,
       isCompleted: false,
     },
     friend: {
       currentIndex: 0,
-      messages: [FRIEND_CHAT_DATA[0]],
-      choices: FRIEND_CHAT_DATA[0].choices || null,
+      messages: [],
+      choices: null,
       showChatOptionsDisplay: false,
       dataSource: FRIEND_CHAT_DATA,
       isCompleted: false,
     },
     guardian: {
       currentIndex: 0,
-      messages: [GUARDIAN_CHAT_DATA[0]],
-      choices: GUARDIAN_CHAT_DATA[0].choices || null,
+      messages: [],
+      choices: null,
       showChatOptionsDisplay: false,
       dataSource: GUARDIAN_CHAT_DATA,
       isCompleted: false,
@@ -42,7 +45,9 @@ const INITIAL_APP_STATE: AppState = {
 
 export function useConversationManager() {
   // Internal state
-  const [appState, setAppState] = useState<AppState>(INITIAL_APP_STATE);
+  const [appState, setAppState] = useLocalStorage<AppState>("conversationAppState", INITIAL_APP_STATE); // Sync with localStorage
+  const [isMounted, setIsMounted] = useState(false);
+  const state = isMounted ? appState : INITIAL_APP_STATE; // Use localStorage state only after mount to avoid hydration issues
 
   // Computed values (derived from state)
   const currentConversation = appState.currentConversation;
@@ -87,12 +92,10 @@ export function useConversationManager() {
     }));
   };
 
-  const sendNPCMessage = (
-    index: number,
-    conversationId: conversationIds = currentConversation,
-  ) => {
-    // Read fresh state each time through the updater
-    const currentState = appState;
+  const sendNPCMessage = useCallback(
+    (index: number, conversationId: conversationIds = currentConversation) => {
+      // Read fresh state each time through the updater
+      const currentState = state;
     const message =
       currentState.conversations[conversationId].dataSource[index];
 
@@ -126,7 +129,7 @@ export function useConversationManager() {
     ) {
       updateConversationState(conversationId, { isCompleted: true });
     }
-  };
+  }, [currentConversation]);
 
   const sendUserChoiceWithFollowUps = async (
     mainText: string,
@@ -164,7 +167,7 @@ export function useConversationManager() {
     );
     setTimeout(() => {
       sendNPCMessage(
-        appState.conversations[currentConversation].currentIndex + 1,
+        state.conversations[currentConversation].currentIndex + 1,
         currentConversation,
       );
     }, 1000);
@@ -176,26 +179,24 @@ export function useConversationManager() {
       currentConversation: newConversationId,
     }));
     sendNPCMessage(
-      appState.conversations[newConversationId].currentIndex,
+      state.conversations[newConversationId].currentIndex,
       newConversationId,
     );
   };
 
-  // Persistence
   useEffect(() => {
-    // Auto-save to localStorage whenever state changes
-    localStorage.setItem("conversationAppState", JSON.stringify(appState));
-  }, [appState]);
+    setIsMounted(true);
+    sendNPCMessage(0, "flowerStore");
+  }, []);
 
   // Return public API
   return {
     // State
-    currentConversation: appState.currentConversation,
+    currentConversation: state.currentConversation,
     messages: currentMessages,
     choices: currentChoices,
     showChatOptions:
-      appState.conversations[currentConversation].showChatOptionsDisplay,
-
+      state.conversations[state.currentConversation].showChatOptionsDisplay,
     // Actions
     switchConversation,
     sendNPCMessage,
@@ -206,6 +207,6 @@ export function useConversationManager() {
     // Utilities
     // resetConversation: (id) => { /* */ },
     isConversationComplete: (id: conversationIds) =>
-      appState.conversations[id].isCompleted,
+      state.conversations[id].isCompleted,
   };
 }

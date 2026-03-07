@@ -1,7 +1,10 @@
+import { ColorTheme } from "../customHook/useThemeUIManager";
+
 interface NotificationProps {
   avatar: string;
   title: string;
   message: string;
+  colorTheme: ColorTheme;
   onClick: () => void;
 }
 
@@ -9,16 +12,17 @@ const Notification = ({
   avatar,
   title,
   message,
-  onClick,
+  colorTheme,
+  onClick
 }: NotificationProps) => {
   return (
     <button
       className="notification"
       onClick={onClick}
       style={{
-        backgroundColor: "#fde0d9",
-        border: "0.5px solid #FAC1B3",
-        boxShadow: "0px 1px 3px #FAC1B3",
+        backgroundColor: `${colorTheme.light}`,
+        border: `0.5px solid ${colorTheme.dark}`,
+        boxShadow: `0px 1px 3px ${colorTheme.dark}`,
       }}
     >
       <img

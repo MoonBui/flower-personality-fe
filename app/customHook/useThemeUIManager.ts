@@ -2,21 +2,20 @@ import { useState } from "react";
 
 export const COLOR_THEME = {
   flowerStore: {
-    bubbleChat: "#DAE7DE",
-    headerLine: "#9BBFA7",
-    chatGradient: "#DAE7DE",
+    light: "#DAE7DE",
+    dark: "#9BBFA7",
   },
   friend: {
-    bubbleChat: "#fde0d9",
-    headerLine: "#FAC1B3",
-    chatGradient: "#fde0d9",
+    light: "#fde0d9",
+    dark: "#FAC1B3",
   },
   guardian: {
-    bubbleChat: "#DCD7EA",
-    headerLine: "#A9A0D9",
-    chatGradient: "#DCD7EA",
+    light: "#DCD7EA",
+    dark: "#A9A0D9",
   },
-};
+} as const;
+
+export type ColorTheme = typeof COLOR_THEME[keyof typeof COLOR_THEME];
 
 export function useThemeUIManager() {
   // Internal state
@@ -29,6 +28,6 @@ export function useThemeUIManager() {
 
   return {
     currentTheme,
-    toggleTheme,
+    toggleTheme
   };
 }
