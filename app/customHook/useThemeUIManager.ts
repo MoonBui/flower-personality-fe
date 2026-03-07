@@ -15,7 +15,7 @@ export const COLOR_THEME = {
   },
 } as const;
 
-export type ColorTheme = typeof COLOR_THEME[keyof typeof COLOR_THEME];
+export type ColorTheme = (typeof COLOR_THEME)[keyof typeof COLOR_THEME];
 
 export function useThemeUIManager() {
   // Internal state
@@ -28,6 +28,6 @@ export function useThemeUIManager() {
 
   return {
     currentTheme,
-    toggleTheme
+    toggleTheme,
   };
 }

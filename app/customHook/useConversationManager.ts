@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useLocalStorage } from 'usehooks-ts';
-import { useState, useEffect, use, useCallback } from "react";
+import { useLocalStorage } from "usehooks-ts";
+import { useEffect } from "react";
 import { Message, ChoiceOption } from "../types/quiz";
 import {
   ConversationState,
@@ -45,9 +45,10 @@ const INITIAL_APP_STATE: AppState = {
 
 export function useConversationManager() {
   // Internal state
-  const [appState, setAppState] = useLocalStorage<AppState>("conversationAppState", INITIAL_APP_STATE); // Sync with localStorage
-  const [isMounted, setIsMounted] = useState(false);
-  const state = isMounted ? appState : INITIAL_APP_STATE; // Use localStorage state only after mount to avoid hydration issues
+  const [appState, setAppState] = useLocalStorage<AppState>(
+    "conversationAppState",
+    INITIAL_APP_STATE,
+  ); // Sync with localStorage
 
   // Computed values (derived from state)
   const currentConversation = appState.currentConversation;
@@ -92,12 +93,11 @@ export function useConversationManager() {
     }));
   };
 
-  const sendNPCMessage = useCallback(
-    (index: number, conversationId: conversationIds = currentConversation) => {
-      // Read fresh state each time through the updater
-      const currentState = state;
-    const message =
-      currentState.conversations[conversationId].dataSource[index];
+  const sendNPCMessage = (
+    index: number,
+    conversationId: conversationIds = currentConversation,
+  ) => {
+    const message = appState.conversations[conversationId].dataSource[index];
 
     if (!message) return;
 
@@ -118,18 +118,16 @@ export function useConversationManager() {
       );
       return;
     } else {
-      setTimeout(() => {
-        sendNPCMessage(index + 1, conversationId); // Pass it along!
-      }, 1000);
+      setTimeout(() => sendNPCMessage(index + 1, conversationId), 1000);
     }
 
     if (
       index ===
-      currentState.conversations[conversationId].dataSource.length - 1
+      appState.conversations[conversationId].dataSource.length - 1
     ) {
       updateConversationState(conversationId, { isCompleted: true });
     }
-  }, [currentConversation]);
+  };
 
   const sendUserChoiceWithFollowUps = async (
     mainText: string,
@@ -167,7 +165,7 @@ export function useConversationManager() {
     );
     setTimeout(() => {
       sendNPCMessage(
-        state.conversations[currentConversation].currentIndex + 1,
+        appState.conversations[currentConversation].currentIndex + 1,
         currentConversation,
       );
     }, 1000);
@@ -179,24 +177,27 @@ export function useConversationManager() {
       currentConversation: newConversationId,
     }));
     sendNPCMessage(
-      state.conversations[newConversationId].currentIndex,
+      appState.conversations[newConversationId].currentIndex,
       newConversationId,
     );
   };
 
   useEffect(() => {
-    setIsMounted(true);
-    sendNPCMessage(0, "flowerStore");
+    if (appState.conversations.flowerStore.messages.length === 0) {
+      sendNPCMessage(0, "flowerStore");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Return public API
   return {
     // State
-    currentConversation: state.currentConversation,
+    currentConversation: appState.currentConversation,
     messages: currentMessages,
     choices: currentChoices,
     showChatOptions:
-      state.conversations[state.currentConversation].showChatOptionsDisplay,
+      appState.conversations[appState.currentConversation]
+        .showChatOptionsDisplay,
     // Actions
     switchConversation,
     sendNPCMessage,
@@ -207,6 +208,6 @@ export function useConversationManager() {
     // Utilities
     // resetConversation: (id) => { /* */ },
     isConversationComplete: (id: conversationIds) =>
-      state.conversations[id].isCompleted,
+      appState.conversations[id].isCompleted,
   };
 }

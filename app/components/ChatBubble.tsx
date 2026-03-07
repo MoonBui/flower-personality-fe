@@ -1,10 +1,9 @@
 interface ChatBubbleProps {
   bgColor: string;
   text: string;
-  type: string;
 }
 
-const ChatBubble = ({ bgColor, text, type }: ChatBubbleProps) => {
+const ChatBubble = ({ bgColor, text }: ChatBubbleProps) => {
   return (
     <div
       className={`chat-bubble`}

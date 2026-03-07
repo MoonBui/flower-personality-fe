@@ -1,4 +1,4 @@
-import { ReactNode, useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef } from "react";
 import ChatBubble from "./ChatBubble";
 import { Message } from "../types/quiz";
 
@@ -29,7 +29,6 @@ const ChatDisplay = ({
             <ChatBubble
               bgColor={msg.type === "npc" ? bubbleColor : "#ADD6FF"}
               text={msg.text}
-              type={msg.type}
             />
           </div>
         ))}

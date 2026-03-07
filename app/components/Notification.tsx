@@ -13,7 +13,7 @@ const Notification = ({
   title,
   message,
   colorTheme,
-  onClick
+  onClick,
 }: NotificationProps) => {
   return (
     <button
