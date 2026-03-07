@@ -3,21 +3,6 @@ import { CHOICE_SCORES } from "../data/score/scoreMapping";
 import { FLOWER_RESULTS } from "../data/score/quizResults";
 import { conversationIds } from "../types/conversationState";
 
-// Maximum possible points per flower (for normalization)
-const MAX_POSSIBLE = {
-  SUN: 18,
-  DESERT: 22,
-  MIST: 19,
-  ALPINE: 24,
-  THORN: 11,
-  WIND: 25,
-  MOON: 23,
-  SHRUB: 26,
-};
-
-// Target maximum for normalization (highest max possible)
-const TARGET_MAX = 26;
-
 // Flower names for display
 export const FLOWER_NAMES = {
   SUN: "Sunflower",

@@ -118,8 +118,6 @@ Object.values(CHOICE_SCORES).forEach((conversation) => {
   });
 });
 
-const TARGET_MAX = Math.max(...Object.values(MAX_POSSIBLE));
-
 /**
  * Initialize empty scores
  */
